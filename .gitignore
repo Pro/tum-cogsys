@@ -28,3 +28,7 @@ setup.bash
 setup.sh
 setup.zsh
 
+.cproject
+.project
+.pydevproject
+
