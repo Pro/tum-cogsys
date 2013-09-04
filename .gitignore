@@ -11,3 +11,20 @@
 *.lai
 *.la
 *.a
+
+*~
+
+# Not public Course packages 
+.rosinstall
+.rosinstall.bak
+cognitivesystems/gripper_control/
+cognitivesystems/robot_control/
+cognitivesystems/ros_Camera/
+cognitivesystems/ros_comm_lib/
+cognitivesystems/ros_objDetect/
+cognitivesystems/ros_objectTracking/
+cognitivesystems/ros_tum_msgs/
+setup.bash
+setup.sh
+setup.zsh
+

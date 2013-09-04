@@ -1,0 +1,21 @@
+<package>
+  <description brief="pro_cambot">
+
+     pro_cambot
+
+  </description>
+  <author>student</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/pro_cambot</url>
+  <depend package="robot_control"/>
+  <depend package="gripper_control"/>
+  <depend package="ros_Camera"/>
+  <depend package="ros_comm_lib"/>
+  <depend package="ros_objDetect"/>
+  <depend package="ros_objectTracking"/>
+  <depend package="ros_tum_msgs"/>
+
+</package>
+
+
