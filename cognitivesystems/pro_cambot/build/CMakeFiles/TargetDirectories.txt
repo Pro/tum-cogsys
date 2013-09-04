@@ -2,6 +2,7 @@
 /home/student/fuerte_workspace/cognitivesystems/pro_cambot/build/CMakeFiles/ROSBUILD_genmsg_lisp.dir
 /home/student/fuerte_workspace/cognitivesystems/pro_cambot/build/CMakeFiles/ROSBUILD_gensrv_cpp.dir
 /home/student/fuerte_workspace/cognitivesystems/pro_cambot/build/CMakeFiles/ROSBUILD_gensrv_lisp.dir
+/home/student/fuerte_workspace/cognitivesystems/pro_cambot/build/CMakeFiles/cam_tracking.dir
 /home/student/fuerte_workspace/cognitivesystems/pro_cambot/build/CMakeFiles/clean-test-results.dir
 /home/student/fuerte_workspace/cognitivesystems/pro_cambot/build/CMakeFiles/rosbuild_precompile.dir
 /home/student/fuerte_workspace/cognitivesystems/pro_cambot/build/CMakeFiles/rosbuild_premsgsrvgen.dir

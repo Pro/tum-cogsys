@@ -148,6 +148,19 @@ ROSBUILD_gensrv_lisp/fast:
 .PHONY : ROSBUILD_gensrv_lisp/fast
 
 #=============================================================================
+# Target rules for targets named cam_tracking
+
+# Build rule for target.
+cam_tracking: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 cam_tracking
+.PHONY : cam_tracking
+
+# fast build rule for target.
+cam_tracking/fast:
+	$(MAKE) -f CMakeFiles/cam_tracking.dir/build.make CMakeFiles/cam_tracking.dir/build
+.PHONY : cam_tracking/fast
+
+#=============================================================================
 # Target rules for targets named clean-test-results
 
 # Build rule for target.
@@ -290,6 +303,21 @@ tests/fast:
 	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/build
 .PHONY : tests/fast
 
+# target to build an object file
+src/cam_tracking.o:
+	$(MAKE) -f CMakeFiles/cam_tracking.dir/build.make CMakeFiles/cam_tracking.dir/src/cam_tracking.o
+.PHONY : src/cam_tracking.o
+
+# target to preprocess a source file
+src/cam_tracking.i:
+	$(MAKE) -f CMakeFiles/cam_tracking.dir/build.make CMakeFiles/cam_tracking.dir/src/cam_tracking.i
+.PHONY : src/cam_tracking.i
+
+# target to generate assembly for a file
+src/cam_tracking.s:
+	$(MAKE) -f CMakeFiles/cam_tracking.dir/build.make CMakeFiles/cam_tracking.dir/src/cam_tracking.s
+.PHONY : src/cam_tracking.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -300,6 +328,7 @@ help:
 	@echo "... ROSBUILD_genmsg_lisp"
 	@echo "... ROSBUILD_gensrv_cpp"
 	@echo "... ROSBUILD_gensrv_lisp"
+	@echo "... cam_tracking"
 	@echo "... clean-test-results"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
@@ -313,6 +342,9 @@ help:
 	@echo "... test-results"
 	@echo "... test-results-run"
 	@echo "... tests"
+	@echo "... src/cam_tracking.o"
+	@echo "... src/cam_tracking.i"
+	@echo "... src/cam_tracking.s"
 .PHONY : help
 
 
