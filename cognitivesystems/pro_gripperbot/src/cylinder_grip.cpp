@@ -25,37 +25,55 @@ void trackerCallback(const ros_tum_msgs::ActorVec& actorArr)
 {
     for (size_t i = 0; i < actorArr.ActorVec.size(); ++i)
     {
-    	ROS_WARN("  ActorVec %d ", i);
+    	ROS_INFO("  ActorVec %d ", i);
     	ros_tum_msgs::Actor a = actorArr.ActorVec[i];
-    	ROS_WARN("New Position: type = %s, property = %s, ", a.targetType.c_str(), a.targetProperty.c_str());
+    	ROS_INFO("New Position: type = %s, property = %s, ", a.targetType.c_str(), a.targetProperty.c_str());
     	if (a.targetProperty.compare("YELLOW")==0){
 			geometry_msgs::Pose p = a.targetPoseVec[i];
-			ROS_WARN("\tPose[%d]: %f|%f|%f", i,p.position.x,p.position.y,p.position.z );
+			ROS_INFO("\tPose[%d]: %f|%f|%f", i,p.position.x,p.position.y,p.position.z );
 
 			robot_control::MoveToOS moveTo;
-			moveTo.request.x = p.position.x;
-			moveTo.request.y = p.position.y;
-			moveTo.request.z = p.position.z;
+			moveTo.request.x = (710.0-p.position.x)/1000.0;
+			moveTo.request.y = (300.0-p.position.y)/1000.0;
+			moveTo.request.z = p.position.z/1000.0+0.1;
 			moveTo.request.effector = "gripper";
-			if (loc->moveToOs.call(moveTo))
-				ROS_INFO("MoveToOS Success: %ld", (long int)moveTo.response.success);
-			else
+			if (!loc->moveToOs.call(moveTo))
 			{
-				ROS_ERROR("Failed to call service MoveToOS");
+				ROS_ERROR("Failed to call service MoveToOS 1");
+				return;
+			}
+			if (moveTo.response.success == 0) {
+
+				ROS_ERROR("MoveToOS 1 failed, success is 0!");
 				return;
 			}
 
-
-			gripper_control::CloseGripper srv;
-			if (loc->closeGripper.call(srv))
+			moveTo.request.z = p.position.z/1000.0;
+			if (!loc->moveToOs.call(moveTo))
 			{
-				ROS_INFO("CloseGripper: %ld", (long int)srv.response.success);
+				ROS_ERROR("Failed to call service MoveToOS 2");
+				return;
 			}
-			else
+			if (moveTo.response.success == 0) {
+
+				ROS_ERROR("MoveToOS 2 failed, success is 0!");
+				return;
+			}
+
+			gripper_control::CloseGripper grpClose;
+			if (!loc->closeGripper.call(grpClose))
 			{
 				ROS_ERROR("Failed to call service close_gripper");
 				return;
 			}
+
+			if (grpClose.response.success == 0) {
+
+				ROS_ERROR("Gripper Close failed, success is 0!");
+				return;
+			}
+
+			ROS_INFO("Gripping successfully finished!");
 
     	}
     }
@@ -74,6 +92,24 @@ int main(int argc, char **argv)
 
 	loc->closeGripper = loc->n.serviceClient<gripper_control::CloseGripper>("/gripper_control/close_gripper");
 	loc->moveToOs = loc->n.serviceClient<robot_control::MoveToOS>("/gripperbot_control/move_to_os");
+
+	ROS_INFO("Initializing robot position...");
+	robot_control::MoveToOS moveTo;
+	moveTo.request.x = 0.3;
+	moveTo.request.y = 0;
+	moveTo.request.z = 0.3;
+	moveTo.request.effector = "gripper";
+	if (!loc->moveToOs.call(moveTo))
+	{
+		ROS_ERROR("Failed to call service MoveToOS init");
+		return 1;
+	}
+	if (moveTo.response.success == 0) {
+
+		ROS_ERROR("MoveToOS init failed, success is 0!");
+		return 1;
+	}
+
 
 	/**
 	* ros::spin() will enter a loop, pumping callbacks.  With this version, all

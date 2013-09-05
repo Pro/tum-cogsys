@@ -10,10 +10,9 @@
   <url>http://ros.org/wiki/pro_gripperbot</url>
   <depend package="robot_control"/>
   <depend package="gripper_control"/>
-  <depend package="ros_Camera"/>
+  <depend package="camera"/>
   <depend package="ros_comm_lib"/>
-  <depend package="ros_objDetect"/>
-  <depend package="ros_objectTracking"/>
+  <depend package="object_detector"/>
   <depend package="ros_tum_msgs"/>
 
 </package>
