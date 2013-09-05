@@ -169,13 +169,13 @@ void trackerCallback(const ros_tum_msgs::ActorVec& actorArr)
 			ROS_INFO("Projected offset (radial length): %.2f mm", offsetRadialProjected*1000.);
 		}
 
-		double correctionOffset = -0.010;
+		double correctionOffset = 0.001;
 
 		double newRobotPosAngle = atan2(poseGreen.position.y, poseGreen.position.x);
 		ROS_INFO("Green angle: %.2f deg", newRobotPosAngle*180./3.1415926);
 
-		double newPosOffsetX = correctionOffset - offsetRadialProjected*cos(newRobotPosAngle);
-		double newPosOffsetY = correctionOffset - offsetRadialProjected*sin(newRobotPosAngle);
+		double newPosOffsetX = correctionOffset + offsetRadialProjected*cos(newRobotPosAngle);
+		double newPosOffsetY = correctionOffset + offsetRadialProjected*sin(newRobotPosAngle);
 
 		ROS_INFO("Used offset X: %.2f mm", newPosOffsetX*1000);
 		ROS_INFO("Used offset Y: %.2f mm", newPosOffsetY*1000);
@@ -194,8 +194,8 @@ void trackerCallback(const ros_tum_msgs::ActorVec& actorArr)
 			return;
 		}
 
-		moveTo.request.x = poseGreen.position.x-0.03-posOffsetX;
-		moveTo.request.y = poseGreen.position.y-posOffsetY;
+		moveTo.request.x = poseGreen.position.x - newPosOffsetX;
+		moveTo.request.y = poseGreen.position.y - newPosOffsetY;
 		moveTo.request.z = poseGreen.position.z+0.027;
 		moveTo.request.effector = "gripper";
 		if (!loc->moveToOs.call(moveTo))
