@@ -3,3 +3,7 @@ demo_cogsys
 object_tracker
 object_detector
 visual_servoing
+demo_cogsys_cpp
+demo_cogsys_java
+re_speech_recognition
+re_tts

@@ -1,0 +1,22 @@
+<package>
+  <description brief="pro_speechbot">
+
+     pro_speechbot
+
+  </description>
+  <author>student</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/pro_speechbot</url>
+  <depend package="camera"/>
+  <depend package="object_detector"/>
+  <depend package="re_tts"/>
+  <depend package="ros_comm_lib"/>
+  <depend package="gripper_control"/>
+  <depend package="re_speech_recognition"/>
+  <depend package="robot_control"/>
+  <depend package="ros_tum_msgs"/>
+
+</package>
+
+
