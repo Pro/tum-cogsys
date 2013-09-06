@@ -29,7 +29,7 @@ bool speechTurnOn() {
 		ROS_ERROR("Failed to call service speechTurnOn");
 		return false;
 	}
-	if (req.response.success!=0)
+	if (req.response.success==0)
 	{
 		ROS_ERROR("Failed to call service speechTurnOn. Success is 0.");
 		return false;
@@ -87,7 +87,7 @@ int main(int argc, char **argv)
 
 	ROS_INFO("Loading grammar ...");
 
-	if (!speechLoadGrammar("our")) {
+	if (!speechLoadGrammar("example")) {
 		return 1;
 	}
 	if (!speechTurnOn()) {

@@ -1,0 +1,13 @@
+#JSGF V1.0;
+
+/**
+ * JSGF Grammar for RoboEarth
+ */
+
+grammar roboearth;
+
+/*public <greeting> = (Good morning | Hello) ( Bhiksha | Evandro | Paul | Philip | Rita | Will );*/
+
+<color> = (green | yellow);
+public <command> = (Take | Grab) [the | a] <color> [object | piece | thing | cylinder];
+
